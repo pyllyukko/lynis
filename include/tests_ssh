@@ -169,6 +169,10 @@
                 SSHOPS="${SSHOPS} UsePrivilegeSeparation:SANDBOX,YES,NO:="
             fi
         fi
+        if [ ${OPENSSHD_VERSION_MAJOR} -gt 7 ] || [ ${OPENSSHD_VERSION_MAJOR} -eq 7 -a ${OPENSSHD_VERSION_MINOR} -ge 4 ]; then
+            LogText "Result: added additional options for OpenSSH >= 7.4"
+            SSHOPS="${SSHOPS} DisableForwarding:YES,,NO:="
+        fi
 
         # Go through our list of options
         for I in ${SSHOPS}; do
